@@ -34,7 +34,7 @@ Asena.addCommand({pattern: 'pp', fromMe: true, desc: Lang.PP_DESC}, (async (mess
     await load.delete();
 }));
 
-Asena.addCommand({pattern: 'block ?(.*)', fromMe: true, desc: Lang.BLOCK_DESC}, (async (message, match) => {    
+Asena.addCommand({pattern: 'block ?(.*)', fromMe: false, desc: Lang.BLOCK_DESC}, (async (message, match) => {    
     if (message.reply_message !== false) {
         await message.client.sendMessage(message.jid, '@' + message.reply_message.jid.split('@')[0] + '```, ' + Lang.BLOCKED + '!```', MessageType.text, {
             quotedMessage: message.reply_message.data, contextInfo: {mentionedJid: [message.reply_message.jid.replace('c.us', 's.whatsapp.net')]}
@@ -55,7 +55,7 @@ Asena.addCommand({pattern: 'block ?(.*)', fromMe: true, desc: Lang.BLOCK_DESC}, 
     }
 }));
 
-Asena.addCommand({pattern: 'unblock ?(.*)', fromMe: true, desc: Lang.UNBLOCK_DESC}, (async (message, match) => {    
+Asena.addCommand({pattern: 'unblock ?(.*)', fromMe: false, desc: Lang.UNBLOCK_DESC}, (async (message, match) => {    
     if (message.reply_message !== false) {
         await message.client.blockUser(message.reply_message.jid, "remove");
         await message.client.sendMessage(message.jid, '@' + message.reply_message.jid.split('@')[0] + '```, ' + Lang.UNBLOCKED + '!```', MessageType.text, {
