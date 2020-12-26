@@ -20,7 +20,7 @@ const heroku = new Heroku({
 
 let baseURI = '/apps/' + Config.HEROKU.APP_NAME;
 
-Asena.addCommand({pattern: 'restart', fromMe: true, desc: Lang.RESTART_DESC}, (async (message, match) => {
+Asena.addCommand({pattern: 'restart', fromMe: false, desc: Lang.RESTART_DESC}, (async (message, match) => {
     await message.sendMessage(Lang.RESTART_MSG);
     console.log(baseURI);
     await heroku.delete(baseURI + '/dynos').catch(async (error) => {
@@ -28,7 +28,7 @@ Asena.addCommand({pattern: 'restart', fromMe: true, desc: Lang.RESTART_DESC}, (a
     });
 }));
 
-Asena.addCommand({pattern: 'shutdown', fromMe: true, desc: Lang.SHUTDOWN_DESC}, (async(message, match) => {
+Asena.addCommand({pattern: 'shutdown', fromMe: false, desc: Lang.SHUTDOWN_DESC}, (async(message, match) => {
     await heroku.get(baseURI + '/formation').then(async (formation) => {
         forID = formation[0].id;
         await message.sendMessage(Lang.SHUTDOWN_MSG);
